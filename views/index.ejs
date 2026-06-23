@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title><%= title %></title>
+  <!-- Font Awesome 6 for crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  <!-- Sticky 3D Animated Navbar - Always at top -->
+  <header class="navbar-header">
+    <nav class="navbar-3d" id="navbar">
+      <!-- Logo -->
+      <div class="logo-area">
+        <i class="fas fa-utensils logo-icon"></i>
+        <span class="logo-text">VIVIDO</span>
+        <i class="fas fa-star logo-star"></i>
+      </div>
+
+      <!-- Navigation Links - Desktop -->
+      <ul class="nav-links" id="navLinks">
+        <li class="nav-item active">
+          <a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#menu-section" class="nav-link"><i class="fas fa-book-open"></i> Menu</a>
+        </li>
+        <li class="nav-item">
+          <a href="#bar-section" class="nav-link"><i class="fas fa-wine-glass-alt"></i> Bar</a>
+        </li>
+        <li class="nav-item">
+          <a href="#events-section" class="nav-link"><i class="fas fa-calendar-alt"></i> Events</a>
+        </li>
+        <li class="nav-item">
+          <a href="#gallery-section" class="nav-link"><i class="fas fa-camera-retro"></i> Gallery</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contact-section" class="nav-link"><i class="fas fa-envelope"></i> Contact</a>
+        </li>
+      </ul>
+
+      <!-- Reservation CTA -->
+      <div class="reserve-btn-3d">
+        <button class="btn-reserve" id="reserveButton">
+          <i class="fas fa-calendar-check"></i>
+          <span>Reserve</span>
+        </button>
+      </div>
+
+      <!-- Mobile menu toggle - positioned at the end for mobile -->
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <!-- floating decorative element -->
+      <div class="food-float">
+        <i class="fas fa-pizza-slice"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main content area - ready for additional sections -->
+  <main class="main-content">
+    <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <!-- 3D Canvas Background -->
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="floatingParticles"></div>
+    
+    <!-- Animated Gradient Overlay -->
+    <div class="gradient-overlay"></div>
+    
+    <!-- Main Content -->
+    <div class="hero-content">
+      <!-- Left Side - Text Content -->
+      <div class="hero-text-content">
+        <div class="hero-badge">
+          <i class="fas fa-award badge-icon"></i>
+          <span>Authentic Italian • Since 1998</span>
+        </div>
+        
+        <h1 class="hero-title">
+          <span class="title-line-1">Experience the</span>
+          <span class="title-highlight">Fiza Palette</span>
+          <span class="title-line-2">of Flavors</span>
+        </h1>
+        
+        <p class="hero-description">
+          Indulge in our signature wood-fired pizzas crafted with passion, 
+          premium ingredients, and centuries-old traditions.
+        </p>
+        
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Pizza Varieties</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">4.9</span>
+            <span class="stat-label">Rating</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">25k+</span>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+        </div>
+        
+        <div class="hero-cta-group">
+          <button class="cta-primary">
+            <i class="fas fa-pizza-slice"></i>
+            Explore Menu
+          </button>
+          <button class="cta-secondary">
+            <i class="fas fa-play-circle"></i>
+            Watch Video
+          </button>
+        </div>
+      </div>
+      
+      <!-- Right Side - 3D Pizza Floating -->
+      <div class="hero-visual">
+        <div class="pizza-container" id="pizzaContainer">
+          <!-- 3D pizza will be rendered here -->
+        </div>
+        <div class="floating-ingredients">
+          <i class="fas fa-cheese ingredient cheese"></i>
+          <i class="fas fa-pepper-hot ingredient pepper"></i>
+          <i class="fas fa-leaf ingredient basil"></i>
+          <i class="fas fa-tomato ingredient tomato"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <i class="fas fa-chevron-down"></i>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    
+    <!-- Animated Food Elements -->
+    <div class="food-elements">
+      <i class="fas fa-pizza-slice element-1"></i>
+      <i class="fas fa-wine-bottle element-2"></i>
+      <i class="fas fa-utensils element-3"></i>
+      <i class="fas fa-seedling element-4"></i>
+    </div>
+  </section>
+
+
+    <!-- Sample sections to demonstrate scroll behavior -->
+    <!-- Animated 3D Menu Section -->
+<section class="menu-section" id="menu-section">
+  <!-- Background Animation -->
+  <div class="menu-bg-animation">
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+  </div>
+  
+  <!-- Section Header -->
+  <div class="menu-header">
+    <span class="menu-subtitle">Our Signature</span>
+    <h2 class="menu-title">
+      <span class="title-icon"><i class="fas fa-utensils"></i></span>
+      Fiza Palette Menu
+    </h2>
+    <p class="menu-description">
+      Handcrafted with passion, baked to perfection in wood-fired ovens
+    </p>
+  </div>
+  
+  <!-- Category Filter -->
+  <div class="menu-categories">
+    <% categories.forEach((category) => { %>
+      <button class="category-btn <%= category.id === 'all' ? 'active' : '' %>" data-category="<%= category.id %>">
+        <i class="fas <%= category.icon %>"></i> <%= category.label %>
+      </button>
+    <% }) %>
+  </div>
+  
+  <!-- 3D Menu Cards Container -->
+  <div class="menu-grid" id="menuGrid">
+    <% menuItems.forEach((item) => { %>
+      <article class="menu-card" data-category="<%= item.category %>">
+        <div class="card-3d-wrapper">
+          <div class="card-front">
+            <div class="card-image" style="background-image: linear-gradient(180deg, rgba(13,10,8,0.12), rgba(13,10,8,0.62)), url('<%= item.image %>');">
+              <div class="food-3d-icon">
+                <i class="fas <%= item.icon %>"></i>
+              </div>
+              <% if (item.badge) { %>
+                <div class="card-badge <%= item.badge.type %>">
+                  <i class="fas <%= item.badge.icon %>"></i> <%= item.badge.label %>
+                </div>
+              <% } %>
+            </div>
+            <div class="card-content">
+              <h3 class="food-name"><%= item.name %></h3>
+              <p class="food-description"><%= item.description %></p>
+              <div class="card-footer">
+                <span class="food-price">$<%= item.price.toFixed(2) %></span>
+                <button class="add-to-cart" data-item-id="<%= item.id %>" type="button">
+                  <i class="fas fa-plus"></i> Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+  
+  <!-- View Full Menu Button -->
+  <div class="menu-cta">
+    <button class="view-full-menu">
+      <span>View Full Menu</span>
+      <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+</section>
+
+<!-- 3D Animated Bar Section -->
+<section class="bar-section" id="bar-section">
+  <!-- 3D Canvas Background -->
+  <canvas id="barCanvas" class="bar-canvas"></canvas>
+  
+  <!-- Floating Liquid Effect -->
+  <div class="liquid-background">
+    <div class="liquid-wave wave-1"></div>
+    <div class="liquid-wave wave-2"></div>
+    <div class="liquid-wave wave-3"></div>
+  </div>
+  
+  <!-- Neon Particles -->
+  <div class="neon-particles" id="neonParticles"></div>
+  
+  <!-- Section Content -->
+  <div class="bar-content">
+    <!-- Left Side - 3D Drink Showcase -->
+    <div class="bar-visual">
+      <div class="drink-3d-container" id="drinkContainer">
+        <!-- 3D Drink will be rendered here -->
+        <div class="drink-reflection"></div>
+      </div>
+      
+      <!-- Floating Ingredients -->
+      <div class="floating-items">
+        <div class="float-item item-1">
+          <i class="fas fa-lemon"></i>
+        </div>
+        <div class="float-item item-2">
+          <i class="fas fa-candy-cane"></i>
+        </div>
+        <div class="float-item item-3">
+          <i class="fas fa-mint"></i>
+        </div>
+        <div class="float-item item-4">
+          <i class="fas fa-cherry"></i>
+        </div>
+        <div class="float-item item-5">
+          <i class="fas fa-cocktail"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Side - Menu & Info -->
+    <div class="bar-info">
+      <div class="bar-header">
+        <div class="bar-badge neon-text">
+          <i class="fas fa-glass-cheers"></i>
+          <span>Premium Bar</span>
+        </div>
+        <h2 class="bar-title">
+          <span class="title-neon">Signature</span>
+          <span class="title-highlight">Cocktails</span>
+        </h2>
+        <p class="bar-subtitle">
+          Expertly crafted drinks that elevate your dining experience
+        </p>
+      </div>
+      
+      <!-- Drink Categories -->
+      <div class="drink-tabs">
+        <button class="tab-btn active" data-tab="cocktails">
+          <i class="fas fa-cocktail"></i> Cocktails
+        </button>
+        <button class="tab-btn" data-tab="mocktails">
+          <i class="fas fa-glass-water"></i> Mocktails
+        </button>
+        <button class="tab-btn" data-tab="hot">
+          <i class="fas fa-mug-hot"></i> Hot Drinks
+        </button>
+      </div>
+      
+      <!-- Drinks Menu Cards -->
+      <div class="drinks-container" id="drinksContainer">
+        <!-- Cocktails -->
+        <div class="drink-card" data-category="cocktails">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-martini-glass"></i>
+            </div>
+            <div class="drink-color color-1"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Neon Martini</h3>
+              <span class="drink-price">$14.99</span>
+            </div>
+            <p>Vodka, blue curaçao, fresh lime, glowing garnish</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.9</span>
+              <span><i class="fas fa-fire"></i> Signature</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <div class="drink-card" data-category="cocktails">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-whiskey-glass"></i>
+            </div>
+            <div class="drink-color color-2"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Smoky Old Fashioned</h3>
+              <span class="drink-price">$16.99</span>
+            </div>
+            <p>Bourbon, smoked wood, bitters, orange twist</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.8</span>
+              <span><i class="fas fa-crown"></i> Premium</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <div class="drink-card" data-category="cocktails">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-champagne-glasses"></i>
+            </div>
+            <div class="drink-color color-3"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Fiza Spritz</h3>
+              <span class="drink-price">$13.99</span>
+            </div>
+            <p>Aperol, prosecco, soda, blood orange, rosemary</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.9</span>
+              <span><i class="fas fa-fire"></i> Popular</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <!-- Mocktails -->
+        <div class="drink-card hidden" data-category="mocktails">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-glass-water"></i>
+            </div>
+            <div class="drink-color color-4"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Virgin Mojito</h3>
+              <span class="drink-price">$9.99</span>
+            </div>
+            <p>Fresh mint, lime, soda, sugar cane, crushed ice</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.7</span>
+              <span><i class="fas fa-leaf"></i> Fresh</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <div class="drink-card hidden" data-category="mocktails">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-citrus-slice"></i>
+            </div>
+            <div class="drink-color color-5"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Tropical Paradise</h3>
+              <span class="drink-price">$11.99</span>
+            </div>
+            <p>Mango, passion fruit, coconut cream, pineapple</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.8</span>
+              <span><i class="fas fa-sun"></i> Tropical</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <!-- Hot Drinks -->
+        <div class="drink-card hidden" data-category="hot">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-mug-hot"></i>
+            </div>
+            <div class="drink-color color-6"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Italian Espresso</h3>
+              <span class="drink-price">$5.99</span>
+            </div>
+            <p>Double shot, dark roast, crema perfecta</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.9</span>
+              <span><i class="fas fa-coffee"></i> Classic</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+        
+        <div class="drink-card hidden" data-category="hot">
+          <div class="drink-visual">
+            <div class="drink-icon">
+              <i class="fas fa-mug-saucer"></i>
+            </div>
+            <div class="drink-color color-7"></div>
+          </div>
+          <div class="drink-details">
+            <div class="drink-header">
+              <h3>Hot Chocolate Luxe</h3>
+              <span class="drink-price">$8.99</span>
+            </div>
+            <p>Belgian chocolate, whipped cream, marshmallows</p>
+            <div class="drink-meta">
+              <span><i class="fas fa-star"></i> 4.8</span>
+              <span><i class="fas fa-heart"></i> Loved</span>
+            </div>
+            <button class="order-btn">
+              <i class="fas fa-plus"></i> Order Now
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Happy Hour Banner -->
+      <div class="happy-hour">
+        <div class="happy-hour-content">
+          <i class="fas fa-clock"></i>
+          <div class="happy-text">
+            <span class="happy-title">Happy Hour</span>
+            <span class="happy-time">4PM - 7PM • 30% Off All Cocktails</span>
+          </div>
+        </div>
+        <div class="countdown" id="countdown">
+          <span>Ends in: <strong id="countdownTimer">02:45:30</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Animated Bar Elements -->
+  <div class="bar-elements">
+    <div class="bar-stool stool-1"></div>
+    <div class="bar-stool stool-2"></div>
+    <div class="bar-counter"></div>
+  </div>
+</section>
+
+<!-- 3D Animated Events Section -->
+<section class="events-section" id="events-section">
+  <!-- 3D Canvas Background -->
+  <canvas id="eventsCanvas" class="events-canvas"></canvas>
+  
+  <!-- Animated Light Beams -->
+  <div class="light-beams">
+    <div class="beam beam-1"></div>
+    <div class="beam beam-2"></div>
+    <div class="beam beam-3"></div>
+    <div class="beam beam-4"></div>
+    <div class="beam beam-5"></div>
+  </div>
+  
+  <!-- Floating Confetti Particles -->
+  <div class="confetti-container" id="confettiContainer"></div>
+  
+  <!-- Section Header -->
+  <div class="events-header">
+    <div class="header-badge">
+      <i class="fas fa-calendar-star"></i>
+      <span>Don't Miss Out</span>
+    </div>
+    <h2 class="events-title">
+      <span class="title-up">Upcoming</span>
+      <span class="title-highlight">Events</span>
+      <span class="title-sub">& Experiences</span>
+    </h2>
+    <p class="events-description">
+      Join us for unforgettable culinary journeys and exclusive dining experiences
+    </p>
+  </div>
+  
+  <!-- Events Carousel Container -->
+  <div class="events-carousel-container">
+    <!-- Navigation Arrows -->
+    <button class="carousel-arrow prev-arrow" id="prevEvent">
+      <i class="fas fa-chevron-left"></i>
+      <span class="arrow-glow"></span>
+    </button>
+    
+    <!-- Events Cards Wrapper -->
+    <div class="events-wrapper" id="eventsWrapper">
+      <!-- Event Card 1 - Wine Tasting -->
+      <div class="event-card active" data-event="1">
+        <div class="event-3d-container">
+          <div class="event-visual">
+            <div class="event-icon-container">
+              <i class="fas fa-wine-bottle event-icon"></i>
+              <div class="event-orbit">
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+              </div>
+            </div>
+            <div class="event-date-badge">
+              <span class="date-day">15</span>
+              <span class="date-month">JUL</span>
+            </div>
+            <div class="event-time-badge">
+              <i class="far fa-clock"></i> 7:00 PM
+            </div>
+          </div>
+          
+          <div class="event-content">
+            <div class="event-category">
+              <i class="fas fa-star"></i> Exclusive Tasting
+            </div>
+            <h3 class="event-name">Grand Wine Tasting Evening</h3>
+            <p class="event-description">
+              Explore a curated selection of premium beverages paired with artisanal cheeses and gourmet bites in an elegant setting.
+            </p>
+            
+            <div class="event-features">
+              <div class="feature">
+                <i class="fas fa-glass-cheers"></i>
+                <span>20+ Varieties</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-cheese"></i>
+                <span>Cheese Pairing</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-user-tie"></i>
+                <span>Expert Guide</span>
+              </div>
+            </div>
+            
+            <div class="event-footer">
+              <div class="event-price">
+                <span class="price-label">Per Person</span>
+                <span class="price-value">$89</span>
+              </div>
+              <button class="book-event-btn">
+                <span>Reserve Spot</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            
+            <div class="event-spots">
+              <i class="fas fa-users"></i>
+              <span>Only <strong>12 spots</strong> remaining</span>
+              <div class="spots-bar">
+                <div class="spots-fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Event Card 2 - Live Music -->
+      <div class="event-card" data-event="2">
+        <div class="event-3d-container">
+          <div class="event-visual">
+            <div class="event-icon-container">
+              <i class="fas fa-music event-icon"></i>
+              <div class="event-orbit">
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+              </div>
+            </div>
+            <div class="event-date-badge">
+              <span class="date-day">22</span>
+              <span class="date-month">JUL</span>
+            </div>
+            <div class="event-time-badge">
+              <i class="far fa-clock"></i> 8:00 PM
+            </div>
+          </div>
+          
+          <div class="event-content">
+            <div class="event-category">
+              <i class="fas fa-music"></i> Live Entertainment
+            </div>
+            <h3 class="event-name">Jazz Night Under Stars</h3>
+            <p class="event-description">
+              Experience soulful jazz performances while enjoying our special 5-course tasting menu with signature cocktails.
+            </p>
+            
+            <div class="event-features">
+              <div class="feature">
+                <i class="fas fa-saxophone"></i>
+                <span>Live Jazz Band</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-utensils"></i>
+                <span>5-Course Meal</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-cocktail"></i>
+                <span>Welcome Drink</span>
+              </div>
+            </div>
+            
+            <div class="event-footer">
+              <div class="event-price">
+                <span class="price-label">Per Person</span>
+                <span class="price-value">$120</span>
+              </div>
+              <button class="book-event-btn">
+                <span>Reserve Spot</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            
+            <div class="event-spots">
+              <i class="fas fa-users"></i>
+              <span>Only <strong>8 spots</strong> remaining</span>
+              <div class="spots-bar">
+                <div class="spots-fill" style="width: 70%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Event Card 3 - Cooking Class -->
+      <div class="event-card" data-event="3">
+        <div class="event-3d-container">
+          <div class="event-visual">
+            <div class="event-icon-container">
+              <i class="fas fa-fire-burner event-icon"></i>
+              <div class="event-orbit">
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+              </div>
+            </div>
+            <div class="event-date-badge">
+              <span class="date-day">29</span>
+              <span class="date-month">JUL</span>
+            </div>
+            <div class="event-time-badge">
+              <i class="far fa-clock"></i> 3:00 PM
+            </div>
+          </div>
+          
+          <div class="event-content">
+            <div class="event-category">
+              <i class="fas fa-graduation-cap"></i> Masterclass
+            </div>
+            <h3 class="event-name">Pizza Making Masterclass</h3>
+            <p class="event-description">
+              Learn the secrets of authentic pizza making from our master chefs. Hands-on experience with all ingredients provided.
+            </p>
+            
+            <div class="event-features">
+              <div class="feature">
+                <i class="fas fa-pizza-slice"></i>
+                <span>Make 3 Pizzas</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-certificate"></i>
+                <span>Certificate</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-gift"></i>
+                <span>Recipe Book</span>
+              </div>
+            </div>
+            
+            <div class="event-footer">
+              <div class="event-price">
+                <span class="price-label">Per Person</span>
+                <span class="price-value">$65</span>
+              </div>
+              <button class="book-event-btn">
+                <span>Reserve Spot</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            
+            <div class="event-spots">
+              <i class="fas fa-users"></i>
+              <span>Only <strong>15 spots</strong> remaining</span>
+              <div class="spots-bar">
+                <div class="spots-fill" style="width: 45%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Event Card 4 - Seasonal -->
+      <div class="event-card" data-event="4">
+        <div class="event-3d-container">
+          <div class="event-visual">
+            <div class="event-icon-container">
+              <i class="fas fa-leaf event-icon"></i>
+              <div class="event-orbit">
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+                <div class="orbit-particle"></div>
+              </div>
+            </div>
+            <div class="event-date-badge">
+              <span class="date-day">05</span>
+              <span class="date-month">AUG</span>
+            </div>
+            <div class="event-time-badge">
+              <i class="far fa-clock"></i> 6:30 PM
+            </div>
+          </div>
+          
+          <div class="event-content">
+            <div class="event-category">
+              <i class="fas fa-seedling"></i> Seasonal Special
+            </div>
+            <h3 class="event-name">Summer Harvest Dinner</h3>
+            <p class="event-description">
+              A farm-to-table experience celebrating summer's finest produce with a specially crafted 7-course vegetarian menu.
+            </p>
+            
+            <div class="event-features">
+              <div class="feature">
+                <i class="fas fa-tractor"></i>
+                <span>Farm Fresh</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-leaf"></i>
+                <span>7 Courses</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-sun"></i>
+                <span>Outdoor Setup</span>
+              </div>
+            </div>
+            
+            <div class="event-footer">
+              <div class="event-price">
+                <span class="price-label">Per Person</span>
+                <span class="price-value">$95</span>
+              </div>
+              <button class="book-event-btn">
+                <span>Reserve Spot</span>
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </div>
+            
+            <div class="event-spots">
+              <i class="fas fa-users"></i>
+              <span>Only <strong>20 spots</strong> remaining</span>
+              <div class="spots-bar">
+                <div class="spots-fill" style="width: 30%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="carousel-arrow next-arrow" id="nextEvent">
+      <i class="fas fa-chevron-right"></i>
+      <span class="arrow-glow"></span>
+    </button>
+  </div>
+  
+  <!-- Event Navigation Dots -->
+  <div class="events-dots" id="eventsDots">
+    <button class="dot active" data-index="0"></button>
+    <button class="dot" data-index="1"></button>
+    <button class="dot" data-index="2"></button>
+    <button class="dot" data-index="3"></button>
+  </div>
+  
+  <!-- View All Events Button -->
+  <div class="events-cta">
+    <button class="view-all-btn">
+      <span>View All Events</span>
+      <i class="fas fa-calendar-alt"></i>
+      <span class="btn-glow"></span>
+    </button>
+  </div>
+  
+  <!-- Floating Decorative Elements -->
+  <div class="floating-decorations">
+    <div class="deco deco-1"><i class="fas fa-star"></i></div>
+    <div class="deco deco-2"><i class="fas fa-circle"></i></div>
+    <div class="deco deco-3"><i class="fas fa-sparkles"></i></div>
+    <div class="deco deco-4"><i class="fas fa-diamond"></i></div>
+    <div class="deco deco-5"><i class="fas fa-crown"></i></div>
+  </div>
+</section>
+
+<!-- 3D Animated Gallery Section -->
+<!-- 3D Animated Gallery Section -->
+<section class="gallery-section" id="gallery-section">
+  <!-- 3D Canvas Background -->
+  <canvas id="galleryCanvas" class="gallery-canvas"></canvas>
+  
+  <!-- Animated Grid Pattern -->
+  <div class="grid-pattern">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+  
+  <!-- Floating Light Orbs -->
+  <div class="light-orbs" id="lightOrbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+  </div>
+  
+  <!-- Section Header -->
+  <div class="gallery-header">
+    <div class="header-badge">
+      <i class="fas fa-camera-retro"></i>
+      <span>Our Moments</span>
+    </div>
+    <h2 class="gallery-title">
+      <span class="title-line">Visual</span>
+      <span class="title-highlight">Gallery</span>
+      <span class="title-line">Experience</span>
+    </h2>
+    <p class="gallery-description">
+      Explore the ambiance, cuisine, and unforgettable moments at VIVIDO
+    </p>
+  </div>
+  
+  <!-- Gallery Filter -->
+  <div class="gallery-filter">
+    <% galleryFilters.forEach((filter) => { %>
+      <button class="filter-btn <%= filter.id === 'all' ? 'active' : '' %>" data-filter="<%= filter.id %>">
+        <i class="fas <%= filter.icon %>"></i> <%= filter.label %>
+      </button>
+    <% }) %>
+  </div>
+  
+  <!-- 3D Gallery Grid -->
+  <div class="gallery-grid" id="galleryGrid">
+    <% galleryItems.forEach((item, index) => { %>
+      <article class="gallery-item visible" data-category="<%= item.category %>" data-index="<%= index %>" data-title="<%= item.title %>" data-desc="<%= item.description %>" data-icon="<%= item.icon %>" data-gradient="<%= item.gradient %>">
+        <div class="gallery-card-3d">
+          <div class="card-inner">
+            <div class="card-front">
+              <div class="image-wrapper">
+                <div class="image-placeholder <%= item.imageClass %>">
+                  <i class="fas <%= item.icon %>"></i>
+                  <div class="image-overlay"></div>
+                </div>
+                <% if (item.badge) { %>
+                  <div class="card-badge <%= item.badge.type %>">
+                    <i class="fas <%= item.badge.icon %>"></i> <%= item.badge.label %>
+                  </div>
+                <% } %>
+              </div>
+              <div class="card-info">
+                <h4><%= item.title %></h4>
+                <p><%= item.subtitle %></p>
+              </div>
+            </div>
+            <div class="card-back">
+              <div class="back-content">
+                <i class="fas <%= item.icon %> back-icon"></i>
+                <h4><%= item.backTitle %></h4>
+                <p><%= item.description %></p>
+                <div class="back-stats">
+                  <span><i class="fas fa-heart"></i> <%= item.likes %></span>
+                  <span><i class="fas fa-eye"></i> <%= item.views %></span>
+                </div>
+                <button class="view-more-btn" type="button">
+                  <i class="fas fa-expand"></i> View Full
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    <% }) %>
+  </div>
+  
+  <!-- Load More Button -->
+  <div class="gallery-cta">
+    <button class="load-more-btn">
+      <span>Load More Photos</span>
+      <i class="fas fa-images"></i>
+      <span class="btn-shine"></span>
+    </button>
+  </div>
+  
+  <!-- Lightbox Modal - Fixed to not hide entire page -->
+  <div class="lightbox-modal" id="lightboxModal" style="display: none;">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">
+        <i class="fas fa-times"></i>
+      </button>
+      <button class="lightbox-nav prev" id="lightboxPrev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <div class="lightbox-image-container">
+        <div class="lightbox-image" id="lightboxImage">
+          <i class="fas fa-image"></i>
+        </div>
+        <div class="lightbox-info">
+          <h3 id="lightboxTitle">Image Title</h3>
+          <p id="lightboxDesc">Image Description</p>
+          <div class="lightbox-actions">
+            <button id="lightboxLike"><i class="fas fa-heart"></i> Like</button>
+            <button id="lightboxShare"><i class="fas fa-share"></i> Share</button>
+            <button id="lightboxDownload"><i class="fas fa-download"></i> Download</button>
+          </div>
+        </div>
+      </div>
+      <button class="lightbox-nav next" id="lightboxNext">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 3D Animated Contact Section -->
+<section class="contact-section" id="contact-section">
+  <!-- 3D Canvas Background -->
+  <canvas id="contactCanvas" class="contact-canvas"></canvas>
+  
+  <!-- Animated Wave Background -->
+  <div class="contact-waves">
+    <div class="wave wave-1"></div>
+    <div class="wave wave-2"></div>
+    <div class="wave wave-3"></div>
+  </div>
+  
+  <!-- Floating Glow Orbs -->
+  <div class="glow-orbs">
+    <div class="glow-orb orb-a"></div>
+    <div class="glow-orb orb-b"></div>
+    <div class="glow-orb orb-c"></div>
+    <div class="glow-orb orb-d"></div>
+  </div>
+  
+  <!-- Section Header -->
+  <div class="contact-header">
+    <div class="header-badge">
+      <i class="fas fa-envelope-open-text"></i>
+      <span>Get In Touch</span>
+    </div>
+    <h2 class="contact-title">
+      <span class="title-line">Contact</span>
+      <span class="title-highlight">With Us</span>
+    </h2>
+    <p class="contact-description">
+      We'd love to hear from you. Reach out for reservations, inquiries, or special requests.
+    </p>
+  </div>
+  
+  <!-- Contact Content -->
+  <div class="contact-content">
+    <!-- Left Side - Contact Info Cards -->
+    <div class="contact-info-side">
+      <!-- Info Card 1 - Address -->
+      <div class="info-card-3d" data-delay="0">
+        <div class="info-card-inner">
+          <div class="info-icon-wrapper">
+            <div class="info-icon-ring"></div>
+            <i class="fas fa-map-marker-alt info-icon"></i>
+          </div>
+          <div class="info-content">
+            <h4>Our Location</h4>
+            <p>123 Gourmet Street</p>
+            <p>Little Italy, NY 10013</p>
+            <a href="#" class="info-link">
+              <i class="fas fa-directions"></i> Get Directions
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Info Card 2 - Phone -->
+      <div class="info-card-3d" data-delay="0.2">
+        <div class="info-card-inner">
+          <div class="info-icon-wrapper">
+            <div class="info-icon-ring"></div>
+            <i class="fas fa-phone-alt info-icon"></i>
+          </div>
+          <div class="info-content">
+            <h4>Call Us</h4>
+            <p>+1 (555) 123-4567</p>
+            <p>+1 (555) 987-6543</p>
+            <a href="tel:+15551234567" class="info-link">
+              <i class="fas fa-phone"></i> Call Now
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Info Card 3 - Email -->
+      <div class="info-card-3d" data-delay="0.4">
+        <div class="info-card-inner">
+          <div class="info-icon-wrapper">
+            <div class="info-icon-ring"></div>
+            <i class="fas fa-envelope info-icon"></i>
+          </div>
+          <div class="info-content">
+            <h4>Email Us</h4>
+            <p>info@vivido.com</p>
+            <p>reservations@vivido.com</p>
+            <a href="mailto:info@vivido.com" class="info-link">
+              <i class="fas fa-paper-plane"></i> Send Email
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Info Card 4 - Hours -->
+      <div class="info-card-3d" data-delay="0.6">
+        <div class="info-card-inner">
+          <div class="info-icon-wrapper">
+            <div class="info-icon-ring"></div>
+            <i class="far fa-clock info-icon"></i>
+          </div>
+          <div class="info-content">
+            <h4>Opening Hours</h4>
+            <p><span>Mon - Thu:</span> 11AM - 10PM</p>
+            <p><span>Fri - Sun:</span> 11AM - 11PM</p>
+            <div class="open-badge">
+              <i class="fas fa-circle"></i> Open Now
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Side - 3D Contact Form -->
+    <div class="contact-form-side">
+      <div class="form-container-3d">
+        <div class="form-glow-border"></div>
+        
+        <div class="form-header">
+          <i class="fas fa-pen-fancy"></i>
+          <h3>Send Us a Message</h3>
+        </div>
+        
+        <form class="contact-form" id="contactForm" action="/api/contact" method="POST">
+          <div class="input-group-3d">
+            <div class="input-wrapper">
+              <i class="fas fa-user input-icon"></i>
+              <input type="text" id="name" name="name" required placeholder="Your Name">
+              <label for="name">Full Name</label>
+              <span class="input-border"></span>
+            </div>
+          </div>
+          
+          <div class="input-group-3d">
+            <div class="input-wrapper">
+              <i class="fas fa-envelope input-icon"></i>
+              <input type="email" id="email" name="email" required placeholder="Your Email">
+              <label for="email">Email Address</label>
+              <span class="input-border"></span>
+            </div>
+          </div>
+          
+          <div class="input-group-3d">
+            <div class="input-wrapper">
+              <i class="fas fa-phone input-icon"></i>
+              <input type="tel" id="phone" name="phone" placeholder="Your Phone">
+              <!-- <label for="phone">Phone Number</label> -->
+              <span class="input-border"></span>
+            </div>
+          </div>
+          
+          <div class="input-group-3d">
+            <div class="input-wrapper">
+              <i class="fas fa-tag input-icon"></i>
+              <select id="subject" name="subject">
+                <option value="" disabled selected>Select Subject</option>
+                <option value="reservation">Table Reservation</option>
+                <option value="event">Private Event</option>
+                <option value="catering">Catering Service</option>
+                <option value="feedback">Feedback</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+              <label for="subject">Subject</label>
+              <span class="input-border"></span>
+            </div>
+          </div>
+          
+          <div class="input-group-3d">
+            <div class="input-wrapper textarea-wrapper">
+              <i class="fas fa-comment-dots input-icon"></i>
+              <textarea id="message" name="message" rows="4" required placeholder="Your Message"></textarea>
+              <label for="message">Message</label>
+              <span class="input-border"></span>
+            </div>
+          </div>
+          
+          <button type="submit" class="submit-btn-3d">
+            <span class="btn-text">Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+            <span class="btn-ripple"></span>
+          </button>
+        </form>
+        
+        <!-- Success Message (Hidden by default) -->
+        <div class="success-message" id="successMessage">
+          <div class="success-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3>Message Sent Successfully!</h3>
+          <p>We'll get back to you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Social Media Links -->
+  <div class="social-links-3d">
+    <a href="#" class="social-btn" data-platform="facebook">
+      <i class="fab fa-facebook-f"></i>
+      <span class="social-tooltip">Facebook</span>
+    </a>
+    <a href="#" class="social-btn" data-platform="instagram">
+      <i class="fab fa-instagram"></i>
+      <span class="social-tooltip">Instagram</span>
+    </a>
+    <a href="#" class="social-btn" data-platform="twitter">
+      <i class="fab fa-twitter"></i>
+      <span class="social-tooltip">Twitter</span>
+    </a>
+    <a href="#" class="social-btn" data-platform="tripadvisor">
+      <i class="fab fa-tripadvisor"></i>
+      <span class="social-tooltip">TripAdvisor</span>
+    </a>
+    <a href="#" class="social-btn" data-platform="youtube">
+      <i class="fab fa-youtube"></i>
+      <span class="social-tooltip">YouTube</span>
+    </a>
+  </div>
+  
+  <!-- Map Placeholder -->
+  <div class="map-container-3d">
+    <div class="map-placeholder">
+      <i class="fas fa-map-marked-alt map-icon"></i>
+      <div class="map-pulse"></div>
+      <span>Find Us on Map</span>
+    </div>
+  </div>
+  
+  <!-- Floating Decorative Icons -->
+  <div class="floating-contact-icons">
+    <i class="fas fa-utensils fci-1"></i>
+    <i class="fas fa-wine-glass-alt fci-2"></i>
+    <i class="fas fa-pizza-slice fci-3"></i>
+    <i class="fas fa-coffee fci-4"></i>
+    <i class="fas fa-ice-cream fci-5"></i>
+  </div>
+</section>
+  </main>
+
+
+  <div class="reservation-modal" id="reservationModal" aria-hidden="true">
+    <div class="reservation-overlay" data-close-reservation></div>
+    <form class="reservation-panel" id="reservationForm" action="/api/reservations" method="POST">
+      <button class="reservation-close" type="button" data-close-reservation aria-label="Close reservation form">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="form-header">
+        <i class="fas fa-chair"></i>
+        <h3>Book a Table</h3>
+      </div>
+      <div class="reservation-grid">
+        <input type="text" name="name" placeholder="Full name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+        <input type="tel" name="phone" placeholder="Phone number">
+        <input type="date" name="date" required>
+        <input type="time" name="time" required>
+        <input type="number" name="guests" min="1" max="20" placeholder="Guests" required>
+      </div>
+      <textarea name="notes" rows="3" placeholder="Special requests"></textarea>
+      <button type="submit" class="submit-btn-3d">
+        <span class="btn-text">Confirm Request</span>
+        <i class="fas fa-paper-plane"></i>
+      </button>
+      <p class="reservation-status" id="reservationStatus"></p>
+    </form>
+  </div>
+
+  <script>window.galleryData = <%- JSON.stringify(galleryItems) %>;</script>
+  <script src="/js/script.js"></script>
+</body>
+</html>
